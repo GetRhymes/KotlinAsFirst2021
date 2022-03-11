@@ -6,15 +6,7 @@ import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 
 
-/**
- * Сложная (6 баллов)
- *
- * В строке представлено выражение вида "2 + 31 - 40 + 13",
- * использующее целые положительные числа, плюсы и минусы, разделённые пробелами.
- * Наличие двух знаков подряд "13 + + 10" или двух чисел подряд "1 2" не допускается.
- * Вернуть значение выражения (6 для примера).
- * При нарушении формата входной строки бросить исключение IllegalArgumentException
- */
+
 class PlusMinusTests {
 
     @Test
@@ -39,6 +31,7 @@ class PlusMinusTests {
         assertThrows(IllegalArgumentException::class.java) { plusMinus("- 4 - 4 - 4") }
         assertThrows(IllegalArgumentException::class.java) { plusMinus("+4+4+4") }
         assertThrows(IllegalArgumentException::class.java) { plusMinus("-4-4-4") }
+        assertThrows(IllegalArgumentException::class.java) { plusMinus("-4 + 4") }
         assertThrows(IllegalArgumentException::class.java) { plusMinus("44 + + 12") }
         assertThrows(IllegalArgumentException::class.java) { plusMinus("44 - - 12") }
         assertThrows(IllegalArgumentException::class.java) { plusMinus("44++12") }
@@ -48,6 +41,7 @@ class PlusMinusTests {
         assertThrows(IllegalArgumentException::class.java) { plusMinus("4 12") }
         assertThrows(IllegalArgumentException::class.java) { plusMinus("2 - p") }
         assertThrows(IllegalArgumentException::class.java) { plusMinus("p + 2") }
+        assertThrows(IllegalArgumentException::class.java) { plusMinus("2 + 2.22") }
         assertThrows(IllegalArgumentException::class.java) { plusMinus("4-12") } //drop
         assertThrows(IllegalArgumentException::class.java) { plusMinus("4       12") } //drop
     }

@@ -6,15 +6,7 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 
-/**
- * Средняя (3 балла)
- *
- * Для заданного набора символов определить, можно ли составить из него
- * указанное слово (регистр символов игнорируется)
- *
- * Например:
- *   canBuildFrom(listOf('a', 'b', 'o'), "baobab") -> true
- */
+
 class CanBuildFromTests {
 
     @Test
@@ -29,6 +21,6 @@ class CanBuildFromTests {
         assertFalse(canBuildFrom(emptyList(), "test"))
         assertFalse(canBuildFrom(listOf('a', 'b'), "test"))
         assertFalse(canBuildFrom(listOf('a', 'b', 't'), "test"))
-//        assertFalse(canBuildFrom(listOf('a', 'b', 't'), ""))
+        assertFalse(canBuildFrom(listOf('a', 'b', 't'), "")) //drop
     }
 }
