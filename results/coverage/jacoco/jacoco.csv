@@ -1,0 +1,74 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+kfirst,lesson10.task1,Parser,304,0,26,0,31,0,20,0,6,0
+kfirst,lesson10.task1,Expression.Negate,13,0,0,0,1,0,2,0,2,0
+kfirst,lesson10.task1,Expression.Constant,10,0,0,0,1,0,2,0,2,0
+kfirst,lesson10.task1,Expression,97,0,11,0,11,0,8,0,1,0
+kfirst,lesson10.task1,Expression.Variable,4,0,0,0,1,0,1,0,1,0
+kfirst,lesson10.task1,Expression.Binary,31,0,0,0,1,0,4,0,4,0
+kfirst,lesson10.task1,RegexKt,107,0,8,0,13,0,6,0,2,0
+kfirst,lesson10.task1,Expression.Operation,33,0,0,0,5,0,1,0,1,0
+kfirst,lesson10.task2,HtmlKt.generateListHtml.new Function1() {...},9,0,0,0,2,0,1,0,1,0
+kfirst,lesson10.task2,HtmlKt,177,0,4,0,30,0,7,0,5,0
+kfirst,lesson10.task2,HtmlKt.convertToHtmlTableUsingKotlinxHtml.1.1.1.new Function1() {...},26,0,2,0,3,0,2,0,1,0
+kfirst,lesson10.task2,HtmlKt.generateSimpleHtml.new Function1() {...},13,0,0,0,2,0,1,0,1,0
+kfirst,lesson10.task2,HtmlKt.generateSimpleHtml.1.new Function1() {...},8,0,0,0,2,0,1,0,1,0
+kfirst,lesson10.task2,HtmlKt.convertToHtmlTableUsingKotlinxHtml.1.1.new Function1() {...},26,0,2,0,3,0,2,0,1,0
+kfirst,lesson10.task2,HtmlKt.convertToHtmlTableUsingKotlinxHtml.1.1.1.1.new Function1() {...},8,0,0,0,1,0,1,0,1,0
+kfirst,lesson10.task2,HtmlKt.generateListHtml.1.1.new Function1() {...},13,0,0,0,1,0,1,0,1,0
+kfirst,lesson10.task2,HtmlKt.convertToHtmlTableUsingKotlinxHtml.1.new Function1() {...},16,0,0,0,2,0,1,0,1,0
+kfirst,lesson10.task2,HTMLItem,16,0,0,0,2,0,3,0,3,0
+kfirst,lesson10.task2,HTML,37,0,0,0,6,0,3,0,3,0
+kfirst,lesson10.task2,HtmlKt.generateListHtml.1.new Function1() {...},9,0,0,0,2,0,1,0,1,0
+kfirst,lesson10.task2,HtmlKt.convertToHtmlTableUsingKotlinxHtml.new Function1() {...},15,0,0,0,2,0,1,0,1,0
+kfirst,lesson10.task2,HTMLBody,34,0,0,0,4,0,4,0,4,0
+kfirst,lesson10.task2,HTMLList,25,0,0,0,2,0,3,0,3,0
+kfirst,lesson6.task1,ParseKt,914,514,98,32,80,37,63,17,12,3
+kfirst,lesson7.task1,FilesKt.chooseLongestChaoticWord.new Function1() {...},0,87,0,14,0,7,0,8,0,1
+kfirst,lesson7.task1,FilesKt,939,105,53,1,70,4,43,1,16,1
+kfirst,lesson7.task1,FilesKt.alignFileByWidth.new Function1() {...},78,0,6,0,6,0,4,0,1,0
+kfirst,lesson5.task1,MapKt,641,68,58,4,55,2,44,4,15,2
+kfirst,lesson1.task1,SimpleKt,195,0,0,0,20,0,14,0,14,0
+kfirst,lesson11.task1,Dimension,56,0,0,0,4,0,3,0,3,0
+kfirst,lesson11.task1,Complex,108,0,0,0,9,0,11,0,11,0
+kfirst,lesson11.task1,Rational,239,0,20,0,37,0,25,0,15,0
+kfirst,lesson11.task1,ComplexKt,13,0,0,0,1,0,1,0,1,0
+kfirst,lesson11.task1,DimensionalValue,287,0,22,0,31,0,24,0,13,0
+kfirst,lesson11.task1,DimensionPrefix,74,0,0,0,5,0,4,0,4,0
+kfirst,lesson11.task1,Polynom,131,0,0,0,12,0,12,0,12,0
+kfirst,lesson11.task1,Dimension.Companion,2,0,0,0,1,0,1,0,1,0
+kfirst,lesson11.task1,UnsignedBigInteger,135,0,0,0,13,0,11,0,11,0
+kfirst,lesson11.task1,DimensionPrefix.Companion,2,0,0,0,1,0,1,0,1,0
+kfirst,lesson11.task1,FixedPointNumber,154,0,0,0,16,0,13,0,13,0
+kfirst,lesson9.task2,MatricesKt,355,0,30,0,26,0,30,0,15,0
+kfirst,lesson9.task2,Holes,21,0,0,0,1,0,3,0,3,0
+kfirst,lesson9.task1,Cell,15,0,0,0,1,0,3,0,3,0
+kfirst,lesson9.task1,MatrixImpl,85,0,0,0,9,0,9,0,9,0
+kfirst,lesson9.task1,MatrixKt,10,0,0,0,1,0,1,0,1,0
+kfirst,lesson4.task1,ListKt,1171,0,64,0,119,0,54,0,22,0
+kfirst,lesson12.task1,Stop,21,0,0,0,1,0,3,0,3,0
+kfirst,lesson12.task1,Time,28,0,0,0,2,0,4,0,4,0
+kfirst,lesson12.task1,PhoneBook,262,0,20,0,27,0,19,0,9,0
+kfirst,lesson12.task1,Train,33,0,0,0,2,0,4,0,4,0
+kfirst,lesson12.task1,TableFunction,73,0,0,0,8,0,8,0,8,0
+kfirst,lesson12.task1,OpenHashSet,89,0,2,0,7,0,9,0,8,0
+kfirst,lesson12.task1,SinglyLinkedList,279,0,48,0,59,0,34,0,10,0
+kfirst,lesson12.task1,SinglyLinkedList.Node,19,0,0,0,3,0,4,0,4,0
+kfirst,lesson12.task1,TrainTimeTable,112,0,0,0,8,0,9,0,9,0
+kfirst,lesson2.task1,IfElseKt,285,0,59,0,47,0,40,0,9,0
+kfirst,lesson8.task1,Line,249,0,16,0,14,0,16,0,8,0
+kfirst,lesson8.task1,Hexagon,44,0,0,0,3,0,5,0,5,0
+kfirst,lesson8.task1,HexPoint,41,0,0,0,3,0,5,0,5,0
+kfirst,lesson8.task1,HexKt,64,0,0,0,4,0,4,0,4,0
+kfirst,lesson8.task1,Circle,56,0,4,0,4,0,7,0,5,0
+kfirst,lesson8.task1,HexSegment,84,0,10,0,5,0,12,0,7,0
+kfirst,lesson8.task1,Direction,78,0,0,0,10,0,4,0,4,0
+kfirst,lesson8.task1,Triangle,200,0,6,0,17,0,14,0,11,0
+kfirst,lesson8.task1,Segment,70,0,10,0,4,0,11,0,6,0
+kfirst,lesson8.task1,Point,37,0,0,0,2,0,4,0,4,0
+kfirst,lesson8.task1,GeometryKt,284,0,24,0,30,0,20,0,8,0
+kfirst,lesson2.task2,LogicalKt,109,0,22,0,8,0,17,0,6,0
+kfirst,lesson8.task3,Graph.Vertex,23,0,0,0,2,0,3,0,3,0
+kfirst,lesson8.task3,Graph,265,0,24,0,30,0,21,0,9,0
+kfirst,lesson8.task2,ChessKt,141,0,0,0,9,0,9,0,9,0
+kfirst,lesson8.task2,Square,59,0,12,0,3,0,11,0,5,0
+kfirst,lesson3.task1,LoopKt,370,0,48,0,66,0,42,0,18,0

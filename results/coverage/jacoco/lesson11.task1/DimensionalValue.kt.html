@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DimensionalValue.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">kfirst</a> &gt; <a href="index.source.html" class="el_package">lesson11.task1</a> &gt; <span class="el_source">DimensionalValue.kt</span></div><h1>DimensionalValue.kt</h1><pre class="source lang-java linenums">@file:Suppress(&quot;UNUSED_P()ARAMETER&quot;)
+
+package lesson11.task1
+
+import java.lang.IllegalArgumentException
+
+/**
+ * Класс &quot;Величина с размерностью&quot;.
+ *
+ * Предназначен для представления величин вроде &quot;6 метров&quot; или &quot;3 килограмма&quot;
+ * Общая сложность задания - средняя, общая ценность в баллах -- 18
+ * Величины с размерностью можно складывать, вычитать, делить, менять им знак.
+ * Их также можно умножать и делить на число.
+ *
+ * В конструктор передаётся вещественное значение и строковая размерность.
+ * Строковая размерность может:
+ * - либо строго соответствовать одной из abbreviation класса Dimension (m, g)
+ * - либо соответствовать одной из приставок, к которой приписана сама размерность (Km, Kg, mm, mg)
+ * - во всех остальных случаях следует бросить IllegalArgumentException
+ */
+<span class="nc" id="L21">class DimensionalValue(value: Double, dimension: String) : Comparable&lt;DimensionalValue&gt; {</span>
+    /**
+     * Величина с БАЗОВОЙ размерностью (например для 1.0Kg следует вернуть результат в граммах -- 1000.0)
+     */
+<span class="nc" id="L25">    val value: Double</span>
+
+    /**
+     * БАЗОВАЯ размерность (опять-таки для 1.0Kg следует вернуть GRAM)
+     */
+<span class="nc" id="L30">    val dimension: Dimension</span>
+
+<span class="nc" id="L32">    init {</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        this.dimension = Dimension.map[dimension.last().toString()]</span>
+<span class="nc" id="L34">            ?: throw IllegalArgumentException(&quot;Incorrect dimension $dimension&quot;)</span>
+
+<span class="nc" id="L36">        val prefix = dimension.replaceFirst(this.dimension.abbreviation, &quot;&quot;)</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        this.value = value * (DimensionPrefix.map[prefix]</span>
+<span class="nc" id="L38">            ?: throw IllegalArgumentException(&quot;Incorrect dimension prefix $prefix&quot;))</span>
+<span class="nc" id="L39">    }</span>
+
+    /**
+     * Конструктор из строки. Формат строки: значение пробел размерность (1 Kg, 3 mm, 100 g и так далее).
+     */
+//    constructor(s: String) : this(s.split(&quot; &quot;)[0].toDouble(), s.split(&quot; &quot;)[1]) {
+//        if (s.matches(Regex(&quot;&quot;&quot;\d+ \w+&quot;&quot;&quot;))) {
+//            val _s = s
+//        } else throw IllegalArgumentException(&quot;Incorrect input string&quot;)
+//    }
+
+<span class="nc" id="L50">    constructor(s: String) : this(</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        if (s.matches(Regex(&quot;&quot;&quot;-?\d+ \w+&quot;&quot;&quot;)))</span>
+<span class="nc" id="L52">            s.split(&quot; &quot;)[0].toDouble()</span>
+<span class="nc" id="L53">        else throw IllegalArgumentException(&quot;Incorrect input string&quot;),</span>
+<span class="nc" id="L54">        s.split(&quot; &quot;)[1]</span>
+<span class="nc" id="L55">    )</span>
+
+    /**
+     * Сложение с другой величиной. Если базовая размерность разная, бросить IllegalArgumentException
+     * (нельзя складывать метры и килограммы)
+     */
+    operator fun plus(other: DimensionalValue): DimensionalValue {
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        if (dimension != other.dimension) throw IllegalArgumentException()</span>
+<span class="nc" id="L63">        return DimensionalValue(value + other.value, dimension.abbreviation)</span>
+    }
+
+    /**
+     * Смена знака величины
+     */
+<span class="nc" id="L69">    operator fun unaryMinus(): DimensionalValue = DimensionalValue(-value, dimension.abbreviation)</span>
+
+    /**
+     * Вычитание другой величины. Если базовая размерность разная, бросить IllegalArgumentException
+     */
+    operator fun minus(other: DimensionalValue): DimensionalValue {
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        if (dimension != other.dimension) throw IllegalArgumentException()</span>
+<span class="nc" id="L76">        return DimensionalValue(value - other.value, dimension.abbreviation)</span>
+    }
+
+    /**
+     * Умножение на число
+     */
+<span class="nc" id="L82">    operator fun times(other: Double): DimensionalValue = DimensionalValue(value * other, dimension.abbreviation)</span>
+
+    /**
+     * Деление на число
+     */
+<span class="nc" id="L87">    operator fun div(other: Double): DimensionalValue = DimensionalValue(value / other, dimension.abbreviation)</span>
+
+    /**
+     * Деление на другую величину. Если базовая размерность разная, бросить IllegalArgumentException
+     */
+    operator fun div(other: DimensionalValue): Double {
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        if (dimension != other.dimension) throw IllegalArgumentException()</span>
+<span class="nc" id="L94">        return value / other.value</span>
+    }
+
+    /**
+     * Сравнение на равенство
+     */
+    override fun equals(other: Any?): Boolean =
+<span class="nc bnc" id="L101" title="All 8 branches missed.">        (other is DimensionalValue) &amp;&amp; (dimension == other.dimension) &amp;&amp; (value == other.value)</span>
+
+    /**
+     * Сравнение на больше/меньше. Если базовая размерность разная, бросить IllegalArgumentException
+     */
+    override fun compareTo(other: DimensionalValue): Int {
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        if (dimension != other.dimension) throw IllegalArgumentException()</span>
+<span class="nc" id="L108">        return value.compareTo(other.value)</span>
+    }
+
+    override fun hashCode(): Int {
+<span class="nc" id="L112">        var result = value.hashCode()</span>
+<span class="nc" id="L113">        result = 31 * result + dimension.hashCode()</span>
+<span class="nc" id="L114">        return result</span>
+    }
+}
+
+/**
+ * Размерность. В этот класс можно добавлять новые варианты (секунды, амперы, прочие), но нельзя убирать
+ */
+<span class="nc" id="L121">enum class Dimension(val abbreviation: String) {</span>
+<span class="nc" id="L122">    METER(&quot;m&quot;),</span>
+<span class="nc" id="L123">    GRAM(&quot;g&quot;);</span>
+
+    companion object {
+<span class="nc" id="L126">        val map = values().associateBy({ it.abbreviation }) { it }</span>
+    }
+}
+
+/**
+ * Приставка размерности. Опять-таки можно добавить новые варианты (деци-, санти-, мега-, ...), но нельзя убирать
+ */
+<span class="nc" id="L133">enum class DimensionPrefix(val abbreviation: String, val multiplier: Double) {</span>
+<span class="nc" id="L134">    ONE(&quot;&quot;, 1.0),</span>
+<span class="nc" id="L135">    KILO(&quot;K&quot;, 1000.0),</span>
+<span class="nc" id="L136">    MILLI(&quot;m&quot;, 0.001);</span>
+
+    companion object {
+<span class="nc" id="L139">        val map = values().associateBy({ it.abbreviation }) { it.multiplier }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
