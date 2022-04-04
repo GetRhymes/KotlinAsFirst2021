@@ -1,5 +1,6 @@
-package lesson7.task1
+package lesson7.task1.oldTests
 
+import lesson7.task1.chooseLongestChaoticWord
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import java.io.File

@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Files.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">kfirst</a> &gt; <a href="index.source.html" class="el_package">lesson7.task1</a> &gt; <span class="el_source">Files.kt</span></div><h1>Files.kt</h1><pre class="source lang-java linenums">@file:Suppress(&quot;UNUSED_PARAMETER&quot;, &quot;ConvertCallChainIntoSequence&quot;)
+
+package lesson7.task1
+
+import java.io.File
+
+// Урок 7: работа с файлами
+// Урок интегральный, поэтому его задачи имеют сильно увеличенную стоимость
+// Максимальное количество баллов = 55
+// Рекомендуемое количество баллов = 20
+// Вместе с предыдущими уроками (пять лучших, 3-7) = 55/103
+
+/**
+ * Пример
+ *
+ * Во входном файле с именем inputName содержится некоторый текст.
+ * Вывести его в выходной файл с именем outputName, выровняв по левому краю,
+ * чтобы длина каждой строки не превосходила lineLength.
+ * Слова в слишком длинных строках следует переносить на следующую строку.
+ * Слишком короткие строки следует дополнять словами из следующей строки.
+ * Пустые строки во входном файле обозначают конец абзаца,
+ * их следует сохранить и в выходном файле
+ */
+fun alignFile(inputName: String, lineLength: Int, outputName: String) {
+<span class="nc bnc" id="L25" title="All 2 branches missed.">    val writer = File(outputName).bufferedWriter()</span>
+<span class="nc" id="L26">    var currentLineLength = 0</span>
+    fun append(word: String) {
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        if (currentLineLength &gt; 0) {</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">            if (word.length + currentLineLength &gt;= lineLength) {</span>
+<span class="nc" id="L30">                writer.newLine()</span>
+<span class="nc" id="L31">                currentLineLength = 0</span>
+            } else {
+<span class="nc" id="L33">                writer.write(&quot; &quot;)</span>
+<span class="nc" id="L34">                currentLineLength++</span>
+            }
+        }
+<span class="nc" id="L37">        writer.write(word)</span>
+<span class="nc" id="L38">        currentLineLength += word.length</span>
+<span class="nc" id="L39">    }</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">    for (line in File(inputName).readLines()) {</span>
+<span class="nc bnc" id="L41" title="All 4 branches missed.">        if (line.isEmpty()) {</span>
+<span class="nc" id="L42">            writer.newLine()</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">            if (currentLineLength &gt; 0) {</span>
+<span class="nc" id="L44">                writer.newLine()</span>
+<span class="nc" id="L45">                currentLineLength = 0</span>
+            }
+<span class="nc" id="L47">            continue</span>
+        }
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        for (word in line.split(Regex(&quot;\\s+&quot;))) {</span>
+<span class="nc" id="L50">            append(word)</span>
+        }
+    }
+<span class="nc" id="L53">    writer.close()</span>
+<span class="nc" id="L54">}</span>
+
+/**
+ * Простая (8 баллов)
+ *
+ * Во входном файле с именем inputName содержится некоторый текст.
+ * Некоторые его строки помечены на удаление первым символом _ (подчёркивание).
+ * Перенести в выходной файл с именем outputName все строки входного файла, убрав при этом помеченные на удаление.
+ * Все остальные строки должны быть перенесены без изменений, включая пустые строки.
+ * Подчёркивание в середине и/или в конце строк значения не имеет.
+ */
+fun deleteMarked(inputName: String, outputName: String) {
+<span class="nc" id="L66">    TODO()</span>
+}
+
+/**
+ * Средняя (14 баллов)
+ *
+ * Во входном файле с именем inputName содержится некоторый текст.
+ * На вход подаётся список строк substrings.
+ * Вернуть ассоциативный массив с числом вхождений каждой из строк в текст.
+ * Регистр букв игнорировать, то есть буквы е и Е считать одинаковыми.
+ *
+ */
+<span class="nc" id="L78">fun countSubstrings(inputName: String, substrings: List&lt;String&gt;): Map&lt;String, Int&gt; = TODO()</span>
+
+
+/**
+ * Средняя (12 баллов)
+ *
+ * В русском языке, как правило, после букв Ж, Ч, Ш, Щ пишется И, А, У, а не Ы, Я, Ю.
+ * Во входном файле с именем inputName содержится некоторый текст на русском языке.
+ * Проверить текст во входном файле на соблюдение данного правила и вывести в выходной
+ * файл outputName текст с исправленными ошибками.
+ *
+ * Регистр заменённых букв следует сохранять.
+ *
+ * Исключения (жюри, брошюра, парашют) в рамках данного задания обрабатывать не нужно
+ *
+ */
+fun sibilants(inputName: String, outputName: String) {
+<span class="nc" id="L95">    TODO()</span>
+}
+
+/**
+ * Средняя (15 баллов)
+ *
+ * Во входном файле с именем inputName содержится некоторый текст (в том числе, и на русском языке).
+ * Вывести его в выходной файл с именем outputName, выровняв по центру
+ * относительно самой длинной строки.
+ *
+ * Выравнивание следует производить путём добавления пробелов в начало строки.
+ *
+ *
+ * Следующие правила должны быть выполнены:
+ * 1) Пробелы в начале и в конце всех строк не следует сохранять.
+ * 2) В случае невозможности выравнивания строго по центру, строка должна быть сдвинута в ЛЕВУЮ сторону
+ * 3) Пустые строки не являются особым случаем, их тоже следует выравнивать
+ * 4) Число строк в выходном файле должно быть равно числу строк во входном (в т. ч. пустых)
+ *
+ */
+fun centerFile(inputName: String, outputName: String) {
+<span class="nc" id="L116">    TODO()</span>
+}
+
+/**
+ * Сложная (20 баллов)
+ *
+ * Во входном файле с именем inputName содержится некоторый текст (в том числе, и на русском языке).
+ * Вывести его в выходной файл с именем outputName, выровняв по левому и правому краю относительно
+ * самой длинной строки.
+ * Выравнивание производить, вставляя дополнительные пробелы между словами: равномерно по всей строке
+ *
+ * Слова внутри строки отделяются друг от друга одним или более пробелом.
+ *
+ * Следующие правила должны быть выполнены:
+ * 1) Каждая строка входного и выходного файла не должна начинаться или заканчиваться пробелом.
+ * 2) Пустые строки или строки из пробелов трансформируются в пустые строки без пробелов.
+ * 3) Строки из одного слова выводятся без пробелов.
+ * 4) Число строк в выходном файле должно быть равно числу строк во входном (в т. ч. пустых).
+ *
+ * Равномерность определяется следующими формальными правилами:
+ * 5) Число пробелов между каждыми двумя парами соседних слов не должно отличаться более, чем на 1.
+ * 6) Число пробелов между более левой парой соседних слов должно быть больше или равно числу пробелов
+ *    между более правой парой соседних слов.
+ *
+ * Следует учесть, что входной файл может содержать последовательности из нескольких пробелов  между слвоами. Такие
+ * последовательности следует учитывать при выравнивании и при необходимости избавляться от лишних пробелов.
+ * Из этого следуют следующие правила:
+ * 7) В самой длинной строке каждая пара соседних слов должна быть отделена В ТОЧНОСТИ одним пробелом
+ * 8) Если входной файл удовлетворяет требованиям 1-7, то он должен быть в точности идентичен выходному файлу
+ */
+fun alignFileByWidth(inputName: String, outputName: String) {
+<span class="nc" id="L147">    val lines = mutableListOf&lt;List&lt;String&gt;&gt;()</span>
+<span class="nc" id="L148">    var len = 0</span>
+<span class="nc" id="L149">    File(inputName).forEachLine { line -&gt;</span>
+<span class="nc bnc" id="L150" title="All 4 branches missed.">        lines += if (line.isNotBlank()) {</span>
+<span class="nc" id="L151">            line.trim().split(Regex(&quot;&quot;&quot; +&quot;&quot;&quot;))</span>
+<span class="nc" id="L152">        } else listOf(&quot;&quot;)</span>
+<span class="nc" id="L153">        val loc = lines.last().joinToString(&quot; &quot;).length</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">        if (loc &gt; len) len = loc</span>
+<span class="nc" id="L155">    }</span>
+
+<span class="nc bnc" id="L157" title="All 2 branches missed.">    for ((ind, sepLine) in lines.withIndex()) {</span>
+<span class="nc" id="L158">        val sep = sepLine.toMutableList()</span>
+<span class="nc" id="L159">        var line = sep.joinToString(&quot; &quot;)</span>
+<span class="nc bnc" id="L160" title="All 4 branches missed.">        while (line.length &lt; len &amp;&amp; sep.size &gt; 1) {</span>
+<span class="nc bnc" id="L161" title="All 4 branches missed.">            for (index in 0 until sep.lastIndex) {</span>
+<span class="nc" id="L162">                line = sep.joinToString(&quot; &quot;)</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">                if (line.length &gt;= len) break</span>
+<span class="nc" id="L164">                sep[index] += &quot; &quot;</span>
+            }
+        }
+<span class="nc" id="L167">        lines[ind] = sep</span>
+    }
+
+<span class="nc bnc" id="L170" title="All 2 branches missed.">    File(outputName).bufferedWriter().use { file -&gt;</span>
+<span class="nc bnc" id="L171" title="All 2 branches missed.">        for (line in lines) file.write(line.joinToString(&quot; &quot;) + &quot;\n&quot;)</span>
+<span class="nc" id="L172">    }</span>
+<span class="nc" id="L173">}</span>
+
+/**
+ * Средняя (14 баллов)
+ *
+ * Во входном файле с именем inputName содержится некоторый текст (в том числе, и на русском языке).
+ *
+ * Вернуть ассоциативный массив, содержащий 20 наиболее часто встречающихся слов с их количеством.
+ * Если в тексте менее 20 различных слов, вернуть все слова.
+ * Вернуть ассоциативный массив с числом слов больше 20, если 20-е, 21-е, ..., последнее слова
+ * имеют одинаковое количество вхождений (см. также тест файла input/onegin.txt).
+ *
+ * Словом считается непрерывная последовательность из букв (кириллических,
+ * либо латинских, без знаков препинания и цифр).
+ * Цифры, пробелы, знаки препинания считаются разделителями слов:
+ * Привет, привет42, привет!!! -привет?!
+ * ^ В этой строчке слово привет встречается 4 раза.
+ *
+ * Регистр букв игнорировать, то есть буквы е и Е считать одинаковыми.
+ * Ключи в ассоциативном массиве должны быть в нижнем регистре.
+ *
+ */
+<span class="nc" id="L195">fun top20Words(inputName: String): Map&lt;String, Int&gt; = TODO()</span>
+
+/**
+ * Средняя (14 баллов)
+ *
+ * Реализовать транслитерацию текста из входного файла в выходной файл посредством динамически задаваемых правил.
+
+ * Во входном файле с именем inputName содержится некоторый текст (в том числе, и на русском языке).
+ *
+ * В ассоциативном массиве dictionary содержится словарь, в котором некоторым символам
+ * ставится в соответствие строчка из символов, например
+ * mapOf('з' to &quot;zz&quot;, 'р' to &quot;r&quot;, 'д' to &quot;d&quot;, 'й' to &quot;y&quot;, 'М' to &quot;m&quot;, 'и' to &quot;yy&quot;, '!' to &quot;!!!&quot;)
+ *
+ * Необходимо вывести в итоговый файл с именем outputName
+ * содержимое текста с заменой всех символов из словаря на соответствующие им строки.
+ *
+ * При этом регистр символов в словаре должен игнорироваться,
+ * но при выводе символ в верхнем регистре отображается в строку, начинающуюся с символа в верхнем регистре.
+ *
+ * Пример.
+ * Входной текст: Здравствуй, мир!
+ *
+ * заменяется на
+ *
+ * Выходной текст: Zzdrавствуy, mир!!!
+ *
+ * Пример 2.
+ *
+ * Входной текст: Здравствуй, мир!
+ * Словарь: mapOf('з' to &quot;zZ&quot;, 'р' to &quot;r&quot;, 'д' to &quot;d&quot;, 'й' to &quot;y&quot;, 'М' to &quot;m&quot;, 'и' to &quot;YY&quot;, '!' to &quot;!!!&quot;)
+ *
+ * заменяется на
+ *
+ * Выходной текст: Zzdrавствуy, mир!!!
+ *
+ * Обратите внимание: данная функция не имеет возвращаемого значения
+ */
+fun transliterate(inputName: String, dictionary: Map&lt;Char, String&gt;, outputName: String) {
+<span class="nc" id="L233">    TODO()</span>
+}
+
+/**
+ * Средняя (12 баллов)
+ *
+ * Во входном файле с именем inputName имеется словарь с одним словом в каждой строчке.
+ * Выбрать из данного словаря наиболее длинное слово,
+ * в котором все буквы разные, например: Неряшливость, Четырёхдюймовка.
+ * Вывести его в выходной файл с именем outputName.
+ * Если во входном файле имеется несколько слов с одинаковой длиной, в которых все буквы разные,
+ * в выходной файл следует вывести их все через запятую.
+ * Регистр букв игнорировать, то есть буквы е и Е считать одинаковыми.
+ *
+ * Пример входного файла:
+ * Карминовый
+ * Боязливый
+ * Некрасивый
+ * Остроумный
+ * БелогЛазый
+ * ФиолетОвый
+
+ * Соответствующий выходной файл:
+ * Карминовый, Некрасивый
+ *
+ * Обратите внимание: данная функция не имеет возвращаемого значения
+ */
+fun chooseLongestChaoticWord(inputName: String, outputName: String) {
+<span class="fc" id="L261">    val chosen = mutableListOf(&quot;&quot;)</span>
+<span class="fc" id="L262">    File(inputName).forEachLine { w -&gt;</span>
+<span class="fc" id="L263">        val wLow = w.lowercase()</span>
+<span class="fc bfc" id="L264" title="All 10 branches covered.">        if (wLow.all { char -&gt; wLow.count { it == char } == 1 }) {</span>
+<span class="pc bpc" id="L265" title="1 of 2 branches missed.">            if (w.length == chosen[0].length) chosen += w</span>
+<span class="pc bpc" id="L266" title="1 of 2 branches missed.">            if (w.length &gt; chosen[0].length) {</span>
+<span class="fc" id="L267">                chosen.clear()</span>
+<span class="fc" id="L268">                chosen += w</span>
+            }
+        }
+<span class="fc" id="L271">    }</span>
+<span class="pc bpc" id="L272" title="1 of 2 branches missed.">    File(outputName).bufferedWriter().use { it.write(chosen.joinToString()) }</span>
+<span class="fc" id="L273">}</span>
+
+/**
+ * Сложная (22 балла)
+ *
+ * Реализовать транслитерацию текста в заданном формате разметки в формат разметки HTML.
+ *
+ * Во входном файле с именем inputName содержится текст, содержащий в себе элементы текстовой разметки следующих типов:
+ * - *текст в курсивном начертании* -- курсив
+ * - **текст в полужирном начертании** -- полужирный
+ * - ~~зачёркнутый текст~~ -- зачёркивание
+ *
+ * Следует вывести в выходной файл этот же текст в формате HTML:
+ * - &lt;i&gt;текст в курсивном начертании&lt;/i&gt;
+ * - &lt;b&gt;текст в полужирном начертании&lt;/b&gt;
+ * - &lt;s&gt;зачёркнутый текст&lt;/s&gt;
+ *
+ * Кроме того, все абзацы исходного текста, отделённые друг от друга пустыми строками, следует обернуть в теги &lt;p&gt;...&lt;/p&gt;,
+ * а весь текст целиком в теги &lt;html&gt;&lt;body&gt;...&lt;/body&gt;&lt;/html&gt;.
+ *
+ * Все остальные части исходного текста должны остаться неизменными с точностью до наборов пробелов и переносов строк.
+ * Отдельно следует заметить, что открывающая последовательность из трёх звёздочек (***) должна трактоваться как &quot;&lt;b&gt;&lt;i&gt;&quot;
+ * и никак иначе.
+ *
+ * При решении этой и двух следующих задач полезно прочитать статью Википедии &quot;Стек&quot;.
+ *
+ * Пример входного файла:
+Lorem ipsum *dolor sit amet*, consectetur **adipiscing** elit.
+Vestibulum lobortis, ~~Est vehicula rutrum *suscipit*~~, ipsum ~~lib~~ero *placerat **tortor***,
+
+Suspendisse ~~et elit in enim tempus iaculis~~.
+ *
+ * Соответствующий выходной файл:
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;p&gt;
+            Lorem ipsum &lt;i&gt;dolor sit amet&lt;/i&gt;, consectetur &lt;b&gt;adipiscing&lt;/b&gt; elit.
+            Vestibulum lobortis. &lt;s&gt;Est vehicula rutrum &lt;i&gt;suscipit&lt;/i&gt;&lt;/s&gt;, ipsum &lt;s&gt;lib&lt;/s&gt;ero &lt;i&gt;placerat &lt;b&gt;tortor&lt;/b&gt;&lt;/i&gt;.
+        &lt;/p&gt;
+        &lt;p&gt;
+            Suspendisse &lt;s&gt;et elit in enim tempus iaculis&lt;/s&gt;.
+        &lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+ *
+ * (Отступы и переносы строк в примере добавлены для наглядности, при решении задачи их реализовывать не обязательно)
+ */
+fun markdownToHtmlSimple(inputName: String, outputName: String) {
+<span class="nc" id="L321">    TODO()</span>
+}
+
+/**
+ * Сложная (23 балла)
+ *
+ * Реализовать транслитерацию текста в заданном формате разметки в формат разметки HTML.
+ *
+ * Во входном файле с именем inputName содержится текст, содержащий в себе набор вложенных друг в друга списков.
+ * Списки бывают двух типов: нумерованные и ненумерованные.
+ *
+ * Каждый элемент ненумерованного списка начинается с новой строки и символа '*', каждый элемент нумерованного списка --
+ * с новой строки, числа и точки. Каждый элемент вложенного списка начинается с отступа из пробелов, на 4 пробела большего,
+ * чем список-родитель. Максимально глубина вложенности списков может достигать 6. &quot;Верхние&quot; списки файла начинются
+ * прямо с начала строки.
+ *
+ * Следует вывести этот же текст в выходной файл в формате HTML:
+ * Нумерованный список:
+ * &lt;ol&gt;
+ *     &lt;li&gt;Раз&lt;/li&gt;
+ *     &lt;li&gt;Два&lt;/li&gt;
+ *     &lt;li&gt;Три&lt;/li&gt;
+ * &lt;/ol&gt;
+ *
+ * Ненумерованный список:
+ * &lt;ul&gt;
+ *     &lt;li&gt;Раз&lt;/li&gt;
+ *     &lt;li&gt;Два&lt;/li&gt;
+ *     &lt;li&gt;Три&lt;/li&gt;
+ * &lt;/ul&gt;
+ *
+ * Кроме того, весь текст целиком следует обернуть в теги &lt;html&gt;&lt;body&gt;&lt;p&gt;...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+ *
+ * Все остальные части исходного текста должны остаться неизменными с точностью до наборов пробелов и переносов строк.
+ *
+ * Пример входного файла:
+///////////////////////////////начало файла/////////////////////////////////////////////////////////////////////////////
+* Утка по-пекински
+    * Утка
+    * Соус
+* Салат Оливье
+    1. Мясо
+        * Или колбаса
+    2. Майонез
+    3. Картофель
+    4. Что-то там ещё
+* Помидоры
+* Фрукты
+    1. Бананы
+    23. Яблоки
+        1. Красные
+        2. Зелёные
+///////////////////////////////конец файла//////////////////////////////////////////////////////////////////////////////
+ *
+ *
+ * Соответствующий выходной файл:
+///////////////////////////////начало файла/////////////////////////////////////////////////////////////////////////////
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          Утка по-пекински
+          &lt;ul&gt;
+            &lt;li&gt;Утка&lt;/li&gt;
+            &lt;li&gt;Соус&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          Салат Оливье
+          &lt;ol&gt;
+            &lt;li&gt;Мясо
+              &lt;ul&gt;
+                &lt;li&gt;Или колбаса&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/li&gt;
+            &lt;li&gt;Майонез&lt;/li&gt;
+            &lt;li&gt;Картофель&lt;/li&gt;
+            &lt;li&gt;Что-то там ещё&lt;/li&gt;
+          &lt;/ol&gt;
+        &lt;/li&gt;
+        &lt;li&gt;Помидоры&lt;/li&gt;
+        &lt;li&gt;Фрукты
+          &lt;ol&gt;
+            &lt;li&gt;Бананы&lt;/li&gt;
+            &lt;li&gt;Яблоки
+              &lt;ol&gt;
+                &lt;li&gt;Красные&lt;/li&gt;
+                &lt;li&gt;Зелёные&lt;/li&gt;
+              &lt;/ol&gt;
+            &lt;/li&gt;
+          &lt;/ol&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+///////////////////////////////конец файла//////////////////////////////////////////////////////////////////////////////
+ * (Отступы и переносы строк в примере добавлены для наглядности, при решении задачи их реализовывать не обязательно)
+ */
+fun markdownToHtmlLists(inputName: String, outputName: String) {
+<span class="nc" id="L422">    TODO()</span>
+}
+
+/**
+ * Очень сложная (30 баллов)
+ *
+ * Реализовать преобразования из двух предыдущих задач одновременно над одним и тем же файлом.
+ * Следует помнить, что:
+ * - Списки, отделённые друг от друга пустой строкой, являются разными и должны оказаться в разных параграфах выходного файла.
+ *
+ */
+fun markdownToHtml(inputName: String, outputName: String) {
+<span class="nc" id="L434">    TODO()</span>
+}
+
+/**
+ * Средняя (12 баллов)
+ *
+ * Вывести в выходной файл процесс умножения столбиком числа lhv (&gt; 0) на число rhv (&gt; 0).
+ *
+ * Пример (для lhv == 19935, rhv == 111):
+   19935
+*    111
+--------
+   19935
++ 19935
++19935
+--------
+ 2212785
+ * Используемые пробелы, отступы и дефисы должны в точности соответствовать примеру.
+ * Нули в множителе обрабатывать так же, как и остальные цифры:
+  235
+*  10
+-----
+    0
++235
+-----
+ 2350
+ *
+ */
+fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
+<span class="nc bnc" id="L463" title="All 2 branches missed.">    File(outputName).bufferedWriter().use { file -&gt;</span>
+        //val len = lhv.toString().length + rhv.toString().length
+<span class="nc" id="L465">        val len = (lhv * rhv).toString().length + 1</span>
+<span class="nc" id="L466">        file.write(String.format(&quot;%${len}d\n*%${len - 1}d\n&quot;, lhv, rhv))</span>
+<span class="nc bnc" id="L467" title="All 4 branches missed.">        for (i in 1..len) file.write(&quot;-&quot;)</span>
+<span class="nc" id="L468">        file.write(String.format(&quot;\n%${len}d\n&quot;, lhv * (rhv % 10)))</span>
+<span class="nc bnc" id="L469" title="All 2 branches missed.">        if (rhv / 10 != 0) {</span>
+<span class="nc bnc" id="L470" title="All 2 branches missed.">            for ((index, num) in (rhv / 10).toString().reversed().withIndex()) {</span>
+<span class="nc" id="L471">                file.write(String.format(&quot;+%${len - index - 2}d\n&quot;, (lhv * num.toString().toInt())))</span>
+            }
+        }
+<span class="nc bnc" id="L474" title="All 4 branches missed.">        for (i in 1..len) file.write(&quot;-&quot;)</span>
+<span class="nc" id="L475">        file.write(String.format(&quot;\n%${len}d&quot;, lhv * rhv))</span>
+<span class="nc" id="L476">    }</span>
+<span class="nc" id="L477">}</span>
+
+
+/**
+ * Сложная (25 баллов)
+ *
+ * Вывести в выходной файл процесс деления столбиком числа lhv (&gt; 0) на число rhv (&gt; 0).
+ *
+ * Пример (для lhv == 19935, rhv == 22):
+  19935 | 22
+ -198     906
+ ----
+    13
+    -0
+    --
+    135
+   -132
+   ----
+      3
+
+ * Используемые пробелы, отступы и дефисы должны в точности соответствовать примеру.
+ *
+ */
+<span class="nc" id="L500">fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String): Nothing = TODO()/*{</span>
+    File(outputName).bufferedWriter().use { file -&gt;
+        val lStr = lhv.toString()
+        val lLen = lStr.length
+        val res = digits(lhv / rhv)
+        var loc = rhv * res[0]
+        if (lhv &lt; rhv &amp;&amp; lhv !in 0..9) {
+            file.write(&quot;$lhv | $rhv\n&quot;)
+            file.write(String.format(&quot;%${lLen}s   ${lhv / rhv}\n&quot;, &quot;-$loc&quot;))
+            file.write(&quot;${genString(&quot;-&quot;, lLen - 1)}\n$lhv&quot;)
+        } else {
+            file.write(&quot; $lhv | $rhv\n&quot;)
+            file.write(String.format(&quot;-%-${lLen}d   ${lhv / rhv}\n&quot;, loc))
+            for (i in &quot;-$loc&quot;) file.write(&quot;-&quot;)
+            file.write(
+                String.format(
+                    &quot;\n%${('-' + (loc).toString()).length}d&quot;,
+                    lStr.substring(0, (loc).toString().length).toInt() - loc
+                )
+            )
+            for ((index, num) in res.withIndex()) {
+                if (index == 0) continue
+                val locLen = (loc).toString().length
+                val locRem = (lStr.substring(0, locLen + 1).toInt() - loc * 10).toString()
+                file.write(&quot;${lStr[locLen]}\n&quot;)
+                file.write(String.format(&quot;%${locLen + 2}s\n&quot;, &quot;-&quot; + rhv * num))
+                val line = genString(&quot;-&quot;, maxOf(locRem.lastIndex, (&quot;-&quot; + rhv * num).lastIndex))
+                file.write(String.format(&quot;%${locLen + 2}s\n&quot;, line))
+                file.write(String.format(&quot;%${locLen + 2}s&quot;, locRem.toInt() - rhv * num))
+                loc = loc * 10 + rhv * num
+            }
+        }
+    }
+}*/
+
+fun genString(pat: String, len: Int): String {
+<span class="nc" id="L536">    var str = &quot;&quot;</span>
+<span class="nc bnc" id="L537" title="All 4 branches missed.">    for (i in 0..len) {</span>
+<span class="nc" id="L538">        str += pat</span>
+    }
+<span class="nc" id="L540">    return str</span>
+}
+
+fun digits(num: Int): List&lt;Int&gt; {
+<span class="nc" id="L544">    val list = mutableListOf&lt;Int&gt;()</span>
+<span class="nc" id="L545">    var loc = num</span>
+    do {
+<span class="nc" id="L547">        list += loc % 10</span>
+<span class="nc" id="L548">        loc /= 10</span>
+<span class="nc bnc" id="L549" title="All 2 branches missed.">    } while (loc != 0)</span>
+<span class="nc" id="L550">    return list.reversed()</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

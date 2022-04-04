@@ -1,5 +1,6 @@
-package lesson6.task1
+package lesson6.task1.oldTests
 
+import lesson6.task1.plusMinus
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test

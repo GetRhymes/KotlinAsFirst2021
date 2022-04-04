@@ -1,5 +1,6 @@
-package lesson5.task1
+package lesson5.task1.oldTests
 
+import lesson5.task1.containsIn
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
